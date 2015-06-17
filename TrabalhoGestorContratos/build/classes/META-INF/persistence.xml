@@ -2,6 +2,15 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="TrabalhoGestorContratos">
 		<class>br.com.trabalho.beans.Grupo</class>
+		<class>br.com.trabalho.beans.Funcionario</class>
+		<class>br.com.trabalho.beans.ProjetoFuncionario</class>
+		<class>br.com.trabalho.beans.Projeto</class>
+		<class>br.com.trabalho.beans.Setor</class>
+		<class>br.com.trabalho.jpa.EntityManagerUtil</class>
+		<class>br.com.trabalho.testes.TesteInserirFuncionario</class>
+		<class>br.com.trabalho.testes.TesteInserirGrupo</class>
+		<class>br.com.trabalho.testes.TesteInserirProjeto</class>
+		<class>br.com.trabalho.testes.TesteInserirSetor</class>
 	<properties>
 			<property name="hibernate.connection.username" value="postgres"/>
 			<property name="hibernate.connection.password" value="sena1980"/>
