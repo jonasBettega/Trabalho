@@ -4,20 +4,21 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.trabalho.beans.Grupo;
 import br.com.trabalho.beans.Setor;
 import br.com.trabalho.jpa.EntityManagerUtil;
 import br.com.trabalho.util.UtilErros;
 import br.com.trabalho.util.UtilMensagens;
 
 public class SetorDAO {
-
-private EntityManager em;
+	
+	private EntityManager em;
 	
 	public SetorDAO(){
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
-	public List<Setor> listarTodosList(){
+	public List<Setor> ListarTodos(){
 		return em.createQuery("from Setor order by nome").getResultList();
 	}
 	

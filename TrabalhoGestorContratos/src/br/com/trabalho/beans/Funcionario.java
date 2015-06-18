@@ -1,5 +1,7 @@
 package br.com.trabalho.beans;
 
+
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -13,144 +15,171 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.Constraint;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
+import com.sun.istack.internal.NotNull;
 
 @Entity
-@Table(name="FUNCIONARIO")
-public class Funcionario implements Serializable{
+@Table(name = "FUNCIONARIO")
+public class Funcionario implements Serializable {
 	@Id
-	@Column(name="ID")
-	@SequenceGenerator(name="SEQ_FUNC", sequenceName="SEQ_FUNC_ID", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_FUNC")
+	@Column(name = "ID")
+	@SequenceGenerator(name = "SEQ_FUNC", sequenceName = "SEQ_FUNC_ID", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_FUNC")
 	private Integer id;
-	@Length(max=50, message="Nome nao pode ultrapassar {max} caracteres")
-	@NotEmpty(message="O nome deve ser informado")
-	@Column(name="NOME", length=50, nullable=false)
-	@Index(name="IDX_NOME_FUNCIONARIO")
+	@Length(max = 50, message = "O nome não pode ultrapassar {max} caracteres")
+	@NotEmpty(message = "O nome deve ser informado")
+	@Column(name = "NOME", length = 50, nullable = false)
+	@Index(name = "IDX_NOME_FUNCIONARIO")
 	private String nome;
-	@NotEmpty(message="O CPF deve ser informado")
-	@CPF(message="Informe um CPF válido")
-	@Column(name="CPF", length=14, nullable=false, unique=true)
+	@NotEmpty(message = "O CPF deve ser informado")
+	@CPF(message = "Informe um CPF valido")
+	@Column(name = "CPF", length = 14, nullable = false, unique = true)
 	private String cpf;
-	@NotEmpty(message="Email deve ser informado")
-	@Email(message="Email deve ser informado")
-	@Column(length=40, nullable=false, name="EMAIL")
+	@NotEmpty(message = "O email deve ser informado")
+	@Email(message = "O email deve ser informado")
+	@Column(length = 40, nullable = false, name = "EMAIL")
 	private String email;
-	@NotNull(message="O salario deve ser informado")
-	@Column(name="SALARIO", nullable=false, columnDefinition="numeric(10,2)")
+	@javax.validation.constraints.NotNull(message = "O salario deve ser informado")
+	@Column(name = "SALARIO", nullable = false, columnDefinition = "numeric(10,2)")
 	private Double salario;
-	@NotNull(message="A data de nascimento deve ser informada")
-	@Column(name="NASCIMENTO", nullable=false)
+	@javax.validation.constraints.NotNull(message = "A data de nascimento deve ser informada")
+	@Column(name = "NASCIMENTO", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar nascimento;
-	@NotNull(message="O nome deve ser informado")
-	@Column(name="ATIVO", nullable=false)
+	@javax.validation.constraints.NotNull(message = "O campo deve ser informado")
+	@Column(name = "ATIVO", nullable = false)
 	private Boolean ativo;
-	@Column(name="FOTO")
+	@Column(name = "FOTO")
 	@Lob
-	private byte [] foto;
-	@NotEmpty(message="O nome do usuário deve ser informado")
-	@Length(max=20, message="O nome de usuário não pode ultrapasar [max] caracteres")
-	@Column(name="NOME_USUARIO", length=20, nullable=false, unique=true)
-	@Index(name="IDX_USUARIO")
+	private byte[] foto;
+	@NotEmpty(message = "Nome de usuario deve ser informado")
+	@Length(max = 20, message = "O nome de usuario não pode ultrapassar {max} caracteres")
+	@Column(name = "NOME_USUARIO", length = 20, nullable = false, unique = true)
+	@Index(name = "IDX_USUARIO_NOME_USUARIO")
 	private String nomeUsuario;
-	@NotEmpty(message="Senha deve ser informado")
-	@Length(max=10, message="A senha não pode ultrapasar [max] caracteres")
-	@Column(name="SENHA", length=10, nullable=false)
+	@NotEmpty(message = "Senha deve ser informada")
+	@Length(max = 10, message = "Senha não pode ultrapassar {max} caracteres")
+	@Column(name = "SENHA", length = 10, nullable = false, unique = true)
 	private String senha;
-	@NotNull(message="O grupo deve ser informado")
+	@javax.validation.constraints.NotNull(message = "O grupo deve ser informado")
 	@ManyToOne
-	@JoinColumn(name="GRUPO", referencedColumnName="ID", nullable=false)
-	
+	@JoinColumn(name = "GRUPO", referencedColumnName = "ID", nullable = false)
 	private Grupo grupo;
-	@NotNull(message="O Setor deve ser informado")
+	@javax.validation.constraints.NotNull(message = "O setor deve ser informado")
 	@ManyToOne
-	@JoinColumn(name="SETOR", referencedColumnName="ID", nullable=false)
-	
+	@JoinColumn(name = "SETOR", referencedColumnName = "ID", nullable = false)
 	private Setor setor;
-	
-	public Funcionario(){
-		
+	@Transient
+	private StreamedContent imagem;
+
+	public Funcionario() {
+
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Double getSalario() {
 		return salario;
 	}
+
 	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
+
 	public Calendar getNascimento() {
 		return nascimento;
 	}
+
 	public void setNascimento(Calendar nascimento) {
 		this.nascimento = nascimento;
 	}
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
+
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
+
 	public byte[] getFoto() {
 		return foto;
 	}
+
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
+
 	public String getNomeUsuario() {
 		return nomeUsuario;
 	}
+
 	public void setNomeUsuario(String nomeUsuario) {
 		this.nomeUsuario = nomeUsuario;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 	public Grupo getGrupo() {
 		return grupo;
 	}
+
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
+
 	public Setor getSetor() {
 		return setor;
 	}
+
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
@@ -182,7 +211,18 @@ public class Funcionario implements Serializable{
 
 	@Override
 	public String toString() {
-		return" nome";
+		return nome;
 	}
-	
+
+	public StreamedContent getImagem() {
+		if (this.getFoto() != null) {
+			return new DefaultStreamedContent(new ByteArrayInputStream(
+					this.getFoto()), "");
+		} else
+			return new DefaultStreamedContent();
+	}
+
+	public void setImagem(StreamedContent imagem) {
+		this.imagem = imagem;
+	}
 }
