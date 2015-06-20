@@ -1,5 +1,6 @@
 package br.com.trabalho.modelo;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,17 +11,17 @@ import br.com.trabalho.util.UtilErros;
 import br.com.trabalho.util.UtilMensagens;
 
 public class GrupoDAO {
-
+	
 	private EntityManager em;
 	
 	public GrupoDAO(){
 		em = EntityManagerUtil.getEntityManager();
 	}
 	
-	public List<Grupo> ListarTodos(){
+	public List<Grupo> listarTodos(){
 		return em.createQuery("from Grupo order by nome").getResultList();
 	}
-	
+
 	public boolean gravar(Grupo obj){
 		try {
 			em.getTransaction().begin();
@@ -38,7 +39,7 @@ public class GrupoDAO {
 			}
 			em.getTransaction().rollback();
 			UtilMensagens.mensagemErro("Erro ao persistir objeto: "+
-												UtilErros.getMensagemErro(e));
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
 	}
@@ -56,15 +57,15 @@ public class GrupoDAO {
 			}
 			em.getTransaction().rollback();
 			UtilMensagens.mensagemErro("Erro ao remover objeto: "+
-												UtilErros.getMensagemErro(e));
+			                                  UtilErros.getMensagemErro(e));
 			return false;
 		}
-	}
+	}	
 	
 	public Grupo localizar(Integer id){
 		return em.find(Grupo.class, id);
 	}
-
+	
 	public EntityManager getEm() {
 		return em;
 	}
@@ -72,6 +73,5 @@ public class GrupoDAO {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-}
 
+}

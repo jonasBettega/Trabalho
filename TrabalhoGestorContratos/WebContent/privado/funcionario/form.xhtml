@@ -3,8 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-       xmlns:p="http://primefaces.org/ui" >
-
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Edição de funcionarios</title>
@@ -14,7 +13,7 @@
 	<h:form enctype="multipart/form-data">
 		<h:messages id="messages" />
 		<h:panelGrid columns="2">
-			<f:facet name="header">Edição de funcionarios</f:facet>
+			<f:facet name="header">Edição de funcionários</f:facet>
 			<f:facet name="footer">
 				<div align="center">
 					<h:commandButton value="Cancelar"
@@ -48,34 +47,36 @@
 			<h:outputLabel value="Ativo" />
 			<h:selectBooleanCheckbox value="#{controleFuncionario.objeto.ativo}" />
 			<h:outputLabel value="Nome de usuario" />
-			<h:inputText value="#{controleFuncionario.objeto.nomeUsuario}" size="20"
-			maxlength="20" />
+			<h:inputText value="#{controleFuncionario.objeto.nomeUsuario}"
+				size="20" maxlength="20" />
 			<h:outputLabel value="Senha" />
-			<h:inputText value="#{controleFuncionario.objeto.senha}" size="10" 
-			maxlength="10" redisplay="true"/>
+			<h:inputSecret value="#{controleFuncionario.objeto.senha}" size="10"
+				maxlength="10" redisplay="true" />
 			<h:outputLabel value="Grupo" />
-			<h:selectOneMenu value="#{controleFuncionario.objeto.grupo}" 
-			converter="#{controleFuncionario.converterGrupo}">
-				<f:selectItem itemLabel="Selecione um grupo" noSelectionOption="true"/>
-				<f:selectItems value="#{controleFuncionario.daoGrupo.ListarTodos()}"/>
+			<h:selectOneMenu value="#{controleFuncionario.objeto.grupo}"
+				converter="#{controleFuncionario.converterGrupo}">
+				<f:selectItem itemLabel="Selecione um grupo"
+					noSelectionOption="true" />
+				<f:selectItems value="#{controleFuncionario.daoGrupo.listarTodos()}" />
 			</h:selectOneMenu>
 			<h:outputLabel value="Setor" />
-			<h:selectOneMenu value="#{controleFuncionario.objeto.setor}" 
-			converter="#{controleFuncionario.converterSetor}">
-				<f:selectItem itemLabel="Selecione um setor" noSelectionOption="true"/>
-				<f:selectItems value="#{controleFuncionario.daoSetor.ListarTodos()}"/>
+			<h:selectOneMenu value="#{controleFuncionario.objeto.setor}"
+				converter="#{controleFuncionario.converterSetor}">
+				<f:selectItem itemLabel="Selecione um setor"
+					noSelectionOption="true" />
+				<f:selectItems value="#{controleFuncionario.daoSetor.listarTodos()}" />
 			</h:selectOneMenu>
 			<h:outputLabel value="Foto:" />
 			<p:fileUpload id="uploadImagem" mode="advanced"
-				update="messages, imagem" auto="true" label="Selecionar"
+				update="messages,imagem" auto="true" label="Selecionar"
 				fileUploadListener="#{controleFuncionario.enviarFoto}"
 				allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 			<h:outputLabel value="" />
 			<p:graphicImage value="#{controleFuncionario.objeto.imagem}"
-			id="imagem" style="width:60px;height:60px" cache="false" />			
+				id="imagem" style="width:60px;height:60px" cache="false" />
 		</h:panelGrid>
 
 	</h:form>
 </h:body>
 </html>
-
+      

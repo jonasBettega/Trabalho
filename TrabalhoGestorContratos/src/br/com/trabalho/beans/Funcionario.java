@@ -15,10 +15,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.Constraint;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Index;
 import org.hibernate.validator.constraints.Email;
@@ -28,8 +28,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import com.sun.istack.internal.NotNull;
-
+@SuppressWarnings("unused")
 @Entity
 @Table(name = "FUNCIONARIO")
 public class Funcionario implements Serializable {

@@ -5,10 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import br.com.trabalho.beans.Funcionario;
+
 import br.com.trabalho.jpa.EntityManagerUtil;
 import br.com.trabalho.util.UtilErros;
 import br.com.trabalho.util.UtilMensagens;
-
 
 public class FuncionarioDAO {
 

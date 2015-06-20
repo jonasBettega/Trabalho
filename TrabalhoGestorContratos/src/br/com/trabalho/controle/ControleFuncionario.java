@@ -6,8 +6,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.apache.commons.io.IOUtils;
+
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -71,14 +72,15 @@ public class ControleFuncionario implements Serializable {
 	}
 	
 	public void enviarFoto(FileUploadEvent event){
+		
 		try {
 			byte[] foto = IOUtils.toByteArray(event.getFile().getInputstream());
 			objeto.setFoto(foto);
 			UtilMensagens.mensagemInformacao("Arquivo enviado com sucesso! "+
 			event.getFile().getFileName());
-		} catch (Exception e) {
-			UtilMensagens.mensagemErro("Erro ao enviar arquivo:"+
-					UtilErros.getMensagemErro(e));
+		} catch (Exception e){
+			UtilMensagens.mensagemErro("Erro ao enviar arquivo:" +
+					UtilErros.getMensagemErro(e)) ;
 		}
 	}
 	
